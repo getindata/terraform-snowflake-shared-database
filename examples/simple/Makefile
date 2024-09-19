@@ -8,4 +8,4 @@ apply:
 	terraform apply tfplan
 
 destroy:
-	terraform destroy
+	terraform destroy 
