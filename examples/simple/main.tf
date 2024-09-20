@@ -1,9 +1,6 @@
-module "terraform_module_template" {
-  source = "../../"
+module "snowflake_shared_database" {
+  source = "../.."
 
-  example_var = "This is a example value."
-
-  sub_resource = {
-    example_var = "This is a example value of sub resource."
-  }
+  name       = "SHARED_DATABASE"
+  from_share = var.from_share
 }
