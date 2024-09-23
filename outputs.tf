@@ -3,6 +3,16 @@ output "name" {
   value       = one(snowflake_shared_database.this[*].name)
 }
 
+output "from_share" {
+  description = "The name of the share from which the database is created"
+  value       = one(snowflake_shared_database.this[*].from_share)
+}
+
+output "comment" {
+  description = "The comment for the database"
+  value       = one(snowflake_shared_database.this[*].comment)
+}
+
 output "external_volume" {
   description = "The database parameter that specifies the default external volume to use for Iceberg tables"
   value       = one(snowflake_shared_database.this[*].external_volume)
@@ -66,6 +76,11 @@ output "quoted_identifiers_ignore_case" {
 output "enable_console_output" {
   description = "If true, enables stdout/stderr fast path logging for anonymous stored procedures"
   value       = one(snowflake_shared_database.this[*].enable_console_output)
+}
+
+output "fully_quallified_name" {
+  description = "The fully qualified name of the database"
+  value       = one(snowflake_shared_database.this[*].fully_quallified_name)
 }
 
 output "roles" {
