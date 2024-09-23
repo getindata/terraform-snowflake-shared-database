@@ -78,11 +78,6 @@ output "enable_console_output" {
   value       = one(snowflake_shared_database.this[*].enable_console_output)
 }
 
-output "fully_qualified_name" {
-  description = "The fully qualified name of the database"
-  value       = one(snowflake_shared_database.this[*].fully_qualified_name)
-}
-
 output "roles" {
   description = "Snowflake Roles"
   value       = local.roles
