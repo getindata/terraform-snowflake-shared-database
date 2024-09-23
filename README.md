@@ -101,9 +101,12 @@ module "snowflake_shared_database" {
 | Name | Description |
 |------|-------------|
 | <a name="output_catalog"></a> [catalog](#output\_catalog) | The database parameter that specifies the default catalog to use for Iceberg tables |
+| <a name="output_comment"></a> [comment](#output\_comment) | The comment for the database |
 | <a name="output_default_ddl_collation"></a> [default\_ddl\_collation](#output\_default\_ddl\_collation) | Specifies a default collation specification for all schemas and tables added to the database. |
 | <a name="output_enable_console_output"></a> [enable\_console\_output](#output\_enable\_console\_output) | If true, enables stdout/stderr fast path logging for anonymous stored procedures |
 | <a name="output_external_volume"></a> [external\_volume](#output\_external\_volume) | The database parameter that specifies the default external volume to use for Iceberg tables |
+| <a name="output_from_share"></a> [from\_share](#output\_from\_share) | The name of the share from which the database is created |
+| <a name="output_fully_qualified_name"></a> [fully\_qualified\_name](#output\_fully\_qualified\_name) | The fully qualified name of the database |
 | <a name="output_log_level"></a> [log\_level](#output\_log\_level) | Specifies the severity level of messages that should be ingested and made available in the active event table. Valid options are: [TRACE DEBUG INFO WARN ERROR FATAL OFF] |
 | <a name="output_name"></a> [name](#output\_name) | Name of the database |
 | <a name="output_quoted_identifiers_ignore_case"></a> [quoted\_identifiers\_ignore\_case](#output\_quoted\_identifiers\_ignore\_case) | If true, the case of quoted identifiers is ignored |
