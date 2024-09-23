@@ -152,7 +152,7 @@ Apache 2 Licensed. See [LICENSE](LICENSE) for full details.
 ## AUTHORS
 
 <!--- Replace repository name -->
-<a href="https://github.com/getindata/REPO_NAME/graphs/contributors">
+<a href="https://github.com/getindata/terraform-snowflake-shared-database/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=getindata/terraform-snowflake-shared-database" />
 </a>
 
