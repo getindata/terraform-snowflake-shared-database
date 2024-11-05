@@ -1,17 +1,19 @@
-module "database_label" {
-  source  = "cloudposse/label/null"
-  version = "0.25.0"
-  context = module.this.context
+data "context_label" "this" {
+  delimiter  = local.context_template == null ? var.name_scheme.delimiter : null
+  properties = local.context_template == null ? var.name_scheme.properties : null
+  template   = local.context_template
 
-  delimiter           = coalesce(module.this.context.delimiter, "_")
-  regex_replace_chars = coalesce(module.this.context.regex_replace_chars, "/[^_a-zA-Z0-9]/")
-  label_value_case    = coalesce(module.this.context.label_value_case, "upper")
+  replace_chars_regex = var.name_scheme.replace_chars_regex
+
+  values = merge(
+    var.name_scheme.extra_values,
+    { name = var.name }
+  )
 }
 
-resource "snowflake_shared_database" "this" {
-  count = module.this.enabled ? 1 : 0
 
-  name       = local.name_from_descriptor
+resource "snowflake_shared_database" "this" {
+  name       = data.context_label.this.rendered
   from_share = var.from_share
   comment    = var.comment
 
@@ -30,19 +32,25 @@ resource "snowflake_shared_database" "this" {
   user_task_minimum_trigger_interval_in_seconds = var.user_task_minimum_trigger_interval_in_seconds
   user_task_timeout_ms                          = var.user_task_timeout_ms
 }
+moved {
+  from = snowflake_shared_database.this[0]
+  to   = snowflake_shared_database.this
+}
 
 module "snowflake_default_role" {
   for_each = local.default_roles
 
   source  = "getindata/role/snowflake"
-  version = "2.1.0"
-  context = module.this.context
+  version = "3.0.1"
 
-  name            = each.key
-  comment         = lookup(each.value, "comment", null)
-  enabled         = local.create_default_roles && lookup(each.value, "enabled", true)
-  attributes      = [one(snowflake_shared_database.this[*].name)]
-  descriptor_name = lookup(each.value, "descriptor_name", "snowflake-role")
+  context_templates = var.context_templates
+
+  name = each.key
+  name_scheme = merge(
+    local.default_role_naming_scheme,
+    lookup(each.value, "name_scheme", {})
+  )
+  comment = lookup(each.value, "comment", null)
 
   granted_to_roles = lookup(each.value, "granted_to_roles", [])
   granted_roles    = lookup(each.value, "granted_roles", [])
@@ -50,38 +58,32 @@ module "snowflake_default_role" {
   account_objects_grants = {
     DATABASE = [{
       privileges  = each.value.database_grants.privileges
-      object_name = one(snowflake_shared_database.this[*].name)
+      object_name = snowflake_shared_database.this.name
     }]
   }
-
-  depends_on = [
-    snowflake_shared_database.this
-  ]
 }
 
 module "snowflake_custom_role" {
   for_each = local.custom_roles
 
   source  = "getindata/role/snowflake"
-  version = "2.1.0"
-  context = module.this.context
+  version = "3.0.1"
 
-  name            = each.key
-  comment         = lookup(each.value, "comment", null)
-  enabled         = module.this.enabled && lookup(each.value, "enabled", true)
-  attributes      = [one(snowflake_shared_database.this[*].name)]
-  descriptor_name = lookup(each.value, "descriptor_name", "snowflake-role")
+  context_templates = var.context_templates
+
+  name = each.key
+  name_scheme = merge(
+    local.default_role_naming_scheme,
+    lookup(each.value, "name_scheme", {})
+  )
+  comment = lookup(each.value, "comment", null)
 
   granted_to_roles = lookup(each.value, "granted_to_roles", [])
   granted_roles    = lookup(each.value, "granted_roles", [])
   account_objects_grants = {
     DATABASE = [{
       privileges  = each.value.database_grants.privileges
-      object_name = one(snowflake_shared_database.this[*].name)
+      object_name = snowflake_shared_database.this.name
     }]
   }
-
-  depends_on = [
-    snowflake_shared_database.this
-  ]
 }

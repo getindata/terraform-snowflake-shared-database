@@ -5,5 +5,9 @@ terraform {
       source  = "Snowflake-Labs/snowflake"
       version = ">= 0.94.0"
     }
+    context = {
+      source  = "cloudposse/context"
+      version = ">=0.4.0"
+    }
   }
 }
