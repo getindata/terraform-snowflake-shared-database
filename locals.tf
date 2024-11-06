@@ -9,18 +9,6 @@ locals {
     }
   }
 
-  #This needs to be the same as an object in roles variable
-  # role_template = {
-  #   enabled              = true
-  #   descriptor_name      = "snowflake-role"
-  #   comment              = null
-  #   role_ownership_grant = "SYSADMIN"
-  #   granted_roles        = []
-  #   granted_to_roles     = []
-  #   granted_to_users     = []
-  #   database_grants      = {}
-  # }
-
   default_roles_definition = {
     readonly = {
       database_grants = {
@@ -35,12 +23,6 @@ locals {
   } }
 
   roles_definition = module.roles_deep_merge.merged
-  # roles_definition = {
-  #   for role_name, role in module.roles_deep_merge.merged : role_name => merge(
-  #     local.role_template,
-  #     role
-  #   )
-  # }
 
   default_roles = {
     for role_name, role in local.roles_definition : role_name => role
