@@ -9,11 +9,10 @@ resource "snowflake_account_role" "this" {
 module "snowflake_shared_database" {
   source = "../.."
 
-  name       = "SHARED_DATABASE"
-  context    = module.this.context
-  from_share = var.from_share
+  name              = "shared_database"
+  context_templates = var.context_templates
+  from_share        = var.from_share
 
-  descriptor_name            = "snowflake-database"
   comment                    = "Sample shared Database"
   replace_invalid_characters = true
   default_ddl_collation      = "UTF8"
@@ -35,6 +34,11 @@ module "snowflake_shared_database" {
       comment          = "Read-only role"
       granted_roles    = [resource.snowflake_account_role.this.name]
       granted_to_users = [resource.snowflake_user.this.name]
+    }
+    custom = {
+      database_grants = {
+        privileges = ["IMPORTED PRIVILEGES"]
+      }
     }
   }
 }
