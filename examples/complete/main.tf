@@ -39,6 +39,9 @@ module "snowflake_shared_database" {
       database_grants = {
         privileges = ["IMPORTED PRIVILEGES"]
       }
+      name_scheme = {
+        uppercase = false
+      }
     }
   }
 }
