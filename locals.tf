@@ -7,6 +7,7 @@ locals {
     extra_values = {
       database = var.name
     }
+    uppercase = var.name_scheme.uppercase
   }
 
   default_roles_definition = {

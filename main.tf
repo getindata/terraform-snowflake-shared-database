@@ -41,7 +41,7 @@ module "snowflake_default_role" {
   for_each = local.default_roles
 
   source  = "getindata/role/snowflake"
-  version = "3.0.1"
+  version = "3.1.0"
 
   context_templates = var.context_templates
 
@@ -67,7 +67,7 @@ module "snowflake_custom_role" {
   for_each = local.custom_roles
 
   source  = "getindata/role/snowflake"
-  version = "3.0.1"
+  version = "3.1.0"
 
   context_templates = var.context_templates
 
