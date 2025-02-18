@@ -13,7 +13,7 @@ data "context_label" "this" {
 
 
 resource "snowflake_shared_database" "this" {
-  name       = data.context_label.this.rendered
+  name       = var.name_scheme.uppercase ? upper(data.context_label.this.rendered) : data.context_label.this.rendered
   from_share = var.from_share
   comment    = var.comment
 
@@ -48,7 +48,7 @@ module "snowflake_default_role" {
   name = each.key
   name_scheme = merge(
     local.default_role_naming_scheme,
-    lookup(each.value, "name_scheme", {})
+    { for k, v in lookup(each.value, "name_scheme", {}) : k => v if v != null }
   )
   comment = lookup(each.value, "comment", null)
 
@@ -74,7 +74,7 @@ module "snowflake_custom_role" {
   name = each.key
   name_scheme = merge(
     local.default_role_naming_scheme,
-    lookup(each.value, "name_scheme", {})
+    { for k, v in lookup(each.value, "name_scheme", {}) : k => v if v != null }
   )
   comment = lookup(each.value, "comment", null)
 
