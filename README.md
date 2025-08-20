@@ -19,6 +19,14 @@ Terraform module for Snowflake Shared Database management.
 * Can create a set of default account roles to simplify access management:
   * `READONLY` - granted `IMPORTED_PRIVILEGES` privilege on the database
 
+## Breaking changes in v2.x of the module
+
+- Due to rename of Snowflake terraform provider source, all `versions.tf` files were updated accordingly.
+
+  Please keep in mind to mirror this change in your own repos also.
+
+  For more information about provider rename, refer to [Snowflake documentation](https://github.com/snowflakedb/terraform-provider-snowflake/blob/main/SNOWFLAKEDB_MIGRATION.md).
+
 ## USAGE
 
 ```terraform
