@@ -108,6 +108,6 @@ var.from_share
 
 | Name | Type |
 |------|------|
-| [snowflake_account_role.this](https://registry.terraform.io/providers/Snowflake-Labs/snowflake/latest/docs/resources/account_role) | resource |
-| [snowflake_user.this](https://registry.terraform.io/providers/Snowflake-Labs/snowflake/latest/docs/resources/user) | resource |
+| [snowflake_account_role.this](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/account_role) | resource |
+| [snowflake_user.this](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/user) | resource |
 <!-- END_TF_DOCS -->

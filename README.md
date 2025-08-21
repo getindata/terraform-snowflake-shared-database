@@ -19,6 +19,14 @@ Terraform module for Snowflake Shared Database management.
 * Can create a set of default account roles to simplify access management:
   * `READONLY` - granted `IMPORTED_PRIVILEGES` privilege on the database
 
+## Breaking changes in v2.x of the module
+
+- Due to rename of Snowflake terraform provider source, all `versions.tf` files were updated accordingly.
+
+  Please keep in mind to mirror this change in your own repos also.
+
+  For more information about provider rename, refer to [Snowflake documentation](https://github.com/snowflakedb/terraform-provider-snowflake/blob/main/SNOWFLAKEDB_MIGRATION.md).
+
 ## USAGE
 
 ```terraform
@@ -75,8 +83,8 @@ module "snowflake_shared_database" {
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_roles_deep_merge"></a> [roles\_deep\_merge](#module\_roles\_deep\_merge) | Invicton-Labs/deepmerge/null | 0.1.5 |
-| <a name="module_snowflake_custom_role"></a> [snowflake\_custom\_role](#module\_snowflake\_custom\_role) | getindata/role/snowflake | 3.1.0 |
-| <a name="module_snowflake_default_role"></a> [snowflake\_default\_role](#module\_snowflake\_default\_role) | getindata/role/snowflake | 3.1.0 |
+| <a name="module_snowflake_custom_role"></a> [snowflake\_custom\_role](#module\_snowflake\_custom\_role) | getindata/role/snowflake | 4.0.0 |
+| <a name="module_snowflake_default_role"></a> [snowflake\_default\_role](#module\_snowflake\_default\_role) | getindata/role/snowflake | 4.0.0 |
 
 ## Outputs
 
@@ -119,7 +127,7 @@ module "snowflake_shared_database" {
 
 | Name | Type |
 |------|------|
-| [snowflake_shared_database.this](https://registry.terraform.io/providers/Snowflake-Labs/snowflake/latest/docs/resources/shared_database) | resource |
+| [snowflake_shared_database.this](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/shared_database) | resource |
 | [context_label.this](https://registry.terraform.io/providers/cloudposse/context/latest/docs/data-sources/label) | data source |
 <!-- END_TF_DOCS -->
 
